@@ -4,7 +4,7 @@ import com.zwy.ipmsg.beans.TransferBean;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.text.DecimalFormat;
+
 import java.util.Vector;
 
 public class TransferTableModel implements TableModel {
@@ -43,15 +43,15 @@ public class TransferTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if(columnIndex==0){
+        if (columnIndex == 0) {
             return rowData.get(rowIndex).getFileName();
-        } else if(columnIndex==1){
+        } else if (columnIndex == 1) {
             return rowData.get(rowIndex).getTotalSize();
-        }else if(columnIndex==2){
+        } else if (columnIndex == 2) {
             return rowData.get(rowIndex).getFinishedSize();
-        }else if(columnIndex==3){
+        } else if (columnIndex == 3) {
             return rowData.get(rowIndex).getPercent();
-        }else if(columnIndex==4){
+        } else if (columnIndex == 4) {
             return rowData.get(rowIndex).getCurrentSpeed();
         }
         return "";

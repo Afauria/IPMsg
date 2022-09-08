@@ -3,6 +3,7 @@ package com.zwy.ipmsg.udp;
 import com.zwy.ipmsg.NetOptions;
 
 import javax.swing.*;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -44,10 +45,10 @@ public class UDPServer implements Runnable {
                     String content = ss[1];
                     if (udpRecCallback != null) {
                         if (flag == NetOptions.Login) {
-                            udpRecCallback.loginCallback(false,content, recPacket.getAddress().getHostName(),
+                            udpRecCallback.loginCallback(false, content, recPacket.getAddress().getHostName(),
                                     recPacket.getAddress().getHostAddress());
                         } else if (flag == NetOptions.Online) {
-                            udpRecCallback.loginCallback(true,content, recPacket.getAddress().getHostName(),
+                            udpRecCallback.loginCallback(true, content, recPacket.getAddress().getHostName(),
                                     recPacket.getAddress().getHostAddress());
                         } else if (flag == NetOptions.Msg) {
                             udpRecCallback.sendMsgCallback(recPacket.getAddress().getHostAddress(), content);
@@ -62,7 +63,7 @@ public class UDPServer implements Runnable {
                 }
             }
         } catch (SocketException e) {
-            JOptionPane.showMessageDialog(null,this.getClass()+ e.toString(), "错误", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showMessageDialog(null, this.getClass() + e.toString(), "错误", JOptionPane.DEFAULT_OPTION);
         }
     }
 }

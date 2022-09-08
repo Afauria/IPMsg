@@ -4,6 +4,7 @@ import com.zwy.ipmsg.beans.UserBean;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
+
 import java.util.Vector;
 
 public class UserInfoListModel implements ListModel {

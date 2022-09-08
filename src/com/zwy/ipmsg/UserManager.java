@@ -13,7 +13,8 @@ public class UserManager {
         }
         return instance;
     }
-    private Vector<UserBean> allUser=new Vector<>();
+
+    private Vector<UserBean> allUser = new Vector<>();
 
     public Vector<UserBean> getAllUser() {
         return allUser;
@@ -22,9 +23,10 @@ public class UserManager {
     public void setAllUser(Vector<UserBean> allUser) {
         this.allUser = allUser;
     }
-    public UserBean getUserBeanByIp(String ip){
+
+    public UserBean getUserBeanByIp(String ip) {
         for (UserBean userBean : allUser) {
-            if(ip.equals(userBean.getAddress())){
+            if (ip.equals(userBean.getAddress())) {
                 return userBean;
             }
         }

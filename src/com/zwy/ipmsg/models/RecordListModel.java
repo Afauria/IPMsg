@@ -3,6 +3,7 @@ package com.zwy.ipmsg.models;
 import com.zwy.ipmsg.beans.RecordItemEntity;
 
 import javax.swing.*;
+
 import java.util.Vector;
 
 /**

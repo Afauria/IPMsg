@@ -1,6 +1,5 @@
 package com.zwy.ipmsg;
 
-
 import com.zwy.ipmsg.beans.RecordItemEntity;
 import com.zwy.ipmsg.beans.TransferBean;
 import com.zwy.ipmsg.beans.UserBean;
@@ -20,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileSystemView;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -29,9 +29,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainWnd {
-    private UDPServer udpServer = UDPServer.getInstance();
-    private RecordSave recordSave = RecordSave.getInstance();
-    private UserManager userManager = UserManager.getInstance();
+    private final UDPServer udpServer = UDPServer.getInstance();
+    private final RecordSave recordSave = RecordSave.getInstance();
+    private final UserManager userManager = UserManager.getInstance();
     private static MainWnd mainWnd;
 
     public static MainWnd getInstance() {
@@ -49,22 +49,19 @@ public class MainWnd {
     private JDialog userInfoDialog;
 
     private JTable userInfoTable;
-    private JList recordList;
-    private JList userList;
+    private JList<RecordItemEntity> recordList;
+    private JList<UserBean> userList;
     private JLabel onlineNum;
-    private JMenuBar menuBar;
-    private Map menus = new HashMap<String, String[]>();
+    private final Map<String, String[]> menus = new HashMap<>();
 
     private JTextArea inputArea;
-    private JButton btnFile;
-    private JButton btnSend;
 
 
-    private Vector<UserBean> allUsers = userManager.getAllUser();
+    private final Vector<UserBean> allUsers = userManager.getAllUser();
     private Vector<RecordItemEntity> currentRecords = new Vector<>();
-    private UserInfoTableModel userInfoTableModel = new UserInfoTableModel(allUsers, Constant.userTableColumn);
-    private UserInfoListModel userInfoListModel = new UserInfoListModel(allUsers);
-    private RecordListModel recordListModel = new RecordListModel(currentRecords);
+    private final UserInfoTableModel userInfoTableModel = new UserInfoTableModel(allUsers, Constant.userTableColumn);
+    private final UserInfoListModel userInfoListModel = new UserInfoListModel(allUsers);
+    private final RecordListModel recordListModel = new RecordListModel(currentRecords);
 
     private UserBean localUser;
     private UserBean remoteUser;
@@ -76,13 +73,7 @@ public class MainWnd {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.updateComponentTreeUI(mainFrame);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
@@ -233,7 +224,7 @@ public class MainWnd {
     }
 
     private void initMenu() {
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         MyMenuItemListener myMenuItemListener = new MyMenuItemListener();
         for (int i = 0; i < Constant.menus.length; i++) {
             menus.put(Constant.menus[i], Constant.menuItems[i]);
@@ -281,8 +272,8 @@ public class MainWnd {
         JScrollPane inputPanel = new JScrollPane(inputArea);
         inputPanel.setBorder(new LineBorder(null, 0));
 
-        btnFile = new JButton("文件");
-        btnSend = new JButton("发送");
+        JButton btnFile = new JButton("文件");
+        JButton btnSend = new JButton("发送");
 
         FileChooserBtnListener fileChooserBtnListener = new FileChooserBtnListener();
 //        btnFile.registerKeyboardAction(fileChooserBtnListener, KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -305,7 +296,6 @@ public class MainWnd {
         chatPanel.add(inputPanel, BorderLayout.CENTER);
         chatPanel.add(sendPanel, BorderLayout.SOUTH);
     }
-
 
     private void initUserListPanel() {
         userList = new JList();
@@ -538,7 +528,7 @@ public class MainWnd {
     public void removeOfflineUser(String address) {
         allUsers.remove(findUserInTable(address));
         recordSave.removeUser(address);
-        currentRecords=recordSave.getRecords(allUsers.get(0).getAddress());
+        currentRecords = recordSave.getRecords(allUsers.get(0).getAddress());
         recordList.setListData(currentRecords);
         userList.setSelectedIndex(0);
         EventQueue.invokeLater(new Runnable() {

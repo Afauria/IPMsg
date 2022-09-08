@@ -6,18 +6,18 @@ import com.zwy.ipmsg.TransferDialog;
 import com.zwy.ipmsg.beans.TransferBean;
 import com.zwy.ipmsg.beans.UserBean;
 import com.zwy.ipmsg.utils.FileUtil;
-import sun.nio.ch.Net;
 
 import javax.swing.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Date;
 
 public class TCPClient implements Runnable {
-    private UserBean localUser;
-    private String address;
-    private File sendfile;
-    private TransferBean transferBean;
+    private final UserBean localUser;
+    private final String address;
+    private final File sendfile;
+    private final TransferBean transferBean;
 
 
     public TCPClient(UserBean localUser, String address, File sendfile, TransferBean transferBean) {
@@ -123,19 +123,19 @@ public class TCPClient implements Runnable {
             dOus.flush();
             fin.close();
 
-        }else if(file.isDirectory()){
+        } else if (file.isDirectory()) {
             dOus.writeInt(NetOptions.Directory);
             dOus.flush();
-            File[] children=file.listFiles();
-            if(children!=null){
+            File[] children = file.listFiles();
+            if (children != null) {
                 dOus.writeInt(children.length);
                 dOus.flush();
-                for(File child:children){
+                for (File child : children) {
                     sendFile(child);
-                    int result=dIns.readInt();
-                    if(result==NetOptions.OVER_ONE_FILE){
+                    int result = dIns.readInt();
+                    if (result == NetOptions.OVER_ONE_FILE) {
                         continue;
-                    }else{
+                    } else {
                         break;
                     }
                 }

@@ -5,6 +5,7 @@ import com.zwy.ipmsg.models.TransferTableModel;
 import com.zwy.ipmsg.rendeders.TransferTableRenderer;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.Vector;
 
@@ -21,10 +22,10 @@ public class TransferDialog {
     private JFrame transferDialog;
     private JTable sendTransferTable;
     private JTable recTransferTable;
-    private Vector<TransferBean> sendTransfer = new Vector<>();
-    private Vector<TransferBean> recTransfer = new Vector<>();
-    private TransferTableModel sendTransferTableModel = new TransferTableModel(sendTransfer, Constant.transferColumn);
-    private TransferTableModel recTransferTableModel = new TransferTableModel(recTransfer, Constant.transferColumn);
+    private final Vector<TransferBean> sendTransfer = new Vector<>();
+    private final Vector<TransferBean> recTransfer = new Vector<>();
+    private final TransferTableModel sendTransferTableModel = new TransferTableModel(sendTransfer, Constant.transferColumn);
+    private final TransferTableModel recTransferTableModel = new TransferTableModel(recTransfer, Constant.transferColumn);
 
     public TransferDialog() {
         initTransferDialog();

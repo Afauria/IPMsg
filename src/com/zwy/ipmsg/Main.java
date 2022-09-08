@@ -6,6 +6,7 @@ import com.zwy.ipmsg.udp.UDPServer;
 import com.zwy.ipmsg.utils.NetUtil;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.net.*;
 
@@ -37,21 +38,21 @@ public class Main {
                 MainWnd mainWnd = MainWnd.getInstance();
                 mainWnd.init();
                 TransferDialog transferDialog = TransferDialog.getInstance();
-                notifyOnline(NetOptions.Login,null);
+                notifyOnline(NetOptions.Login, null);
             }
         });
 
     }
 
-    public static void notifyOnline(int state,String address) {
-        InetAddress target=null;
+    public static void notifyOnline(int state, String address) {
+        InetAddress target = null;
         //向局域网发送广播，通知上线
-        if(address==null){
-            target=NetUtil.getBroadCastIP();
-        }else{
+        if (address == null) {
+            target = NetUtil.getBroadCastIP();
+        } else {
             //向上线用户发送回复，通知自己在线，让用户获取当前在线用户信息
             try {
-                target=InetAddress.getByName(address);
+                target = InetAddress.getByName(address);
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }

@@ -1,6 +1,5 @@
 package com.zwy.ipmsg.beans;
 
-import javax.swing.*;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {

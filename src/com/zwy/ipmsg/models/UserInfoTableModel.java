@@ -4,6 +4,7 @@ import com.zwy.ipmsg.beans.UserBean;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+
 import java.util.Vector;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Vector;
  */
 public class UserInfoTableModel implements TableModel {
     private Vector<UserBean> rowData;
-    private Object[] columnNames;
+    private final Object[] columnNames;
 
     public Vector<UserBean> getRowData() {
         return rowData;

@@ -5,8 +5,8 @@ import com.zwy.ipmsg.Main;
 import com.zwy.ipmsg.beans.UserBean;
 
 import javax.swing.*;
-import java.awt.*;
 
+import java.awt.*;
 
 public class UserInfoListRenderer implements ListCellRenderer {
 

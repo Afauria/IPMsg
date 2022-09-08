@@ -5,10 +5,8 @@ import com.zwy.ipmsg.Constant;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class TCPServer implements Runnable {
     private static TCPServer tcpServer;
@@ -23,7 +21,7 @@ public class TCPServer implements Runnable {
     @Override
     public void run() {
         ServerSocket serverSocket = null;
-        ExecutorService executor= Executors.newCachedThreadPool();
+        ExecutorService executor = Executors.newCachedThreadPool();
         try {
             serverSocket = new ServerSocket(Constant.TCP_SERVER_PORT);
             while (true) {

@@ -1,9 +1,11 @@
 package com.zwy.ipmsg.rendeders;
 
 import com.zwy.ipmsg.beans.RecordItemEntity;
+
 import sun.security.tools.keytool.Main;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
@@ -15,8 +17,8 @@ public class RecordListRenderer implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         RecordItemEntity recordItemEntity = (RecordItemEntity) value;
         JPanel panel = new JPanel();
-        JPanel leftPanel=new JPanel();
-        JPanel rightPanel=new JPanel();
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
         JPanel topPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
         RoundPanel contentBG = new RoundPanel();
@@ -58,19 +60,19 @@ public class RecordListRenderer implements ListCellRenderer {
         rightPanel.add(topPanel);
         rightPanel.add(bottomPanel);
 
-        leftPanel.setPreferredSize(new Dimension(80,80));
-        JLabel img=new JLabel();
-        ImageIcon icon=new ImageIcon(Main.class.getResource(recordItemEntity.getIconUrl()));
-        int width=70, height=70;
-        icon.setImage(icon.getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT));
+        leftPanel.setPreferredSize(new Dimension(80, 80));
+        JLabel img = new JLabel();
+        ImageIcon icon = new ImageIcon(Main.class.getResource(recordItemEntity.getIconUrl()));
+        int width = 70, height = 70;
+        icon.setImage(icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
         img.setIcon(icon);
         leftPanel.add(img);
 
-        panel.setLayout(new FlowLayout(recordItemEntity.isMine()?FlowLayout.RIGHT:FlowLayout.LEFT));
-        if(recordItemEntity.isMine()){
+        panel.setLayout(new FlowLayout(recordItemEntity.isMine() ? FlowLayout.RIGHT : FlowLayout.LEFT));
+        if (recordItemEntity.isMine()) {
             panel.add(rightPanel);
             panel.add(leftPanel);
-        }else{
+        } else {
             panel.add(leftPanel);
             panel.add(rightPanel);
         }

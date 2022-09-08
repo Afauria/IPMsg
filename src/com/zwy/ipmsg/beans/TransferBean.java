@@ -1,8 +1,5 @@
 package com.zwy.ipmsg.beans;
 
-import java.awt.*;
-import java.text.DecimalFormat;
-
 public class TransferBean {
     private String fileName;
     private long totalSize;

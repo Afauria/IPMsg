@@ -4,6 +4,7 @@ import com.zwy.ipmsg.Constant;
 import com.zwy.ipmsg.NetOptions;
 
 import javax.swing.*;
+
 import java.net.*;
 
 /**
@@ -11,9 +12,9 @@ import java.net.*;
  */
 public class UDPSend implements Runnable {
 
-    private InetAddress address;
-    private int option;
-    private String msg;
+    private final InetAddress address;
+    private final int option;
+    private final String msg;
 
     public UDPSend(int option, InetAddress address, String msg) {
         this.address = address;

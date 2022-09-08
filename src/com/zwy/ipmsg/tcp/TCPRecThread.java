@@ -1,25 +1,22 @@
 package com.zwy.ipmsg.tcp;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.zwy.ipmsg.NetOptions;
 import com.zwy.ipmsg.TransferDialog;
 import com.zwy.ipmsg.UserManager;
 import com.zwy.ipmsg.beans.TransferBean;
-import com.zwy.ipmsg.beans.UserBean;
 import com.zwy.ipmsg.utils.FileUtil;
-import com.zwy.ipmsg.utils.NetUtil;
-import sun.nio.ch.Net;
 
 import javax.swing.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Date;
 
 public class TCPRecThread implements Runnable {
-    private UserManager userManager = UserManager.getInstance();
+    private final UserManager userManager = UserManager.getInstance();
     private String savePath = "Download";
 
-    private Socket client;
+    private final Socket client;
     private InputStream ins;
     private BufferedInputStream bIns;
     private DataInputStream dIns;
@@ -33,6 +30,7 @@ public class TCPRecThread implements Runnable {
     private int receivedSize = 0;
     private long oldTime;
     private byte[] buffer;
+
     public TCPRecThread(Socket client) {
         this.client = client;
     }
@@ -40,7 +38,7 @@ public class TCPRecThread implements Runnable {
 
     @Override
     public void run() {
-        buffer= new byte[1024];
+        buffer = new byte[1024];
         try {
             ins = client.getInputStream();
             bIns = new BufferedInputStream(ins);
@@ -90,19 +88,19 @@ public class TCPRecThread implements Runnable {
 
     private TransferBean transferBean;
 
-    private void recFile(String fileDir) throws IOException{
+    private void recFile(String fileDir) throws IOException {
         String name = dIns.readUTF();
         int type = dIns.readInt();
         if (type == NetOptions.File) {
-            File tempFile = new File(fileDir+File.separator+name);
+            File tempFile = new File(fileDir + File.separator + name);
             FileOutputStream fOut = new FileOutputStream(tempFile);
-            long fileSize=dIns.readLong();
+            long fileSize = dIns.readLong();
             int len = 0;
-            long singleReceivedSize=0;
+            long singleReceivedSize = 0;
             while ((len = dIns.read(buffer)) != -1) {
                 fOut.write(buffer, 0, len);
                 receivedSize += len;
-                singleReceivedSize+=len;
+                singleReceivedSize += len;
                 long newTime = new Date().getTime();
                 transferBean.setFinishedSize(receivedSize);
                 transferBean.setPercent((int) (receivedSize / 1.0f / transferBean.getTotalSize() * 100));
@@ -117,11 +115,11 @@ public class TCPRecThread implements Runnable {
             dOus.flush();
             fOut.close();
         } else if (type == NetOptions.Directory) {
-            File dir = new File(fileDir+File.separator+name);
+            File dir = new File(fileDir + File.separator + name);
             dir.mkdirs();
-            int childCount=dIns.readInt();
-            for(int i=0;i<childCount;i++){
-                recFile(fileDir+File.separator+name);
+            int childCount = dIns.readInt();
+            for (int i = 0; i < childCount; i++) {
+                recFile(fileDir + File.separator + name);
             }
             dOus.writeInt(NetOptions.OVER_ONE_FILE);
             dOus.flush();

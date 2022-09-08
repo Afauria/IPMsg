@@ -37,9 +37,11 @@ public class RecordSave {
     public void addUser(String key) {
         recordMap.put(key, new Vector<>());
     }
-    public void removeUser(String key){
+
+    public void removeUser(String key) {
         recordMap.remove(key);
     }
+
     public Vector<RecordItemEntity> getRecords(String key) {
         return recordMap.get(key);
     }

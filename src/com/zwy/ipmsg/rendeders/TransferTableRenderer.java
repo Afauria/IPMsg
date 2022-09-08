@@ -1,10 +1,10 @@
 package com.zwy.ipmsg.rendeders;
 
 import com.zwy.ipmsg.utils.FileUtil;
-import sun.awt.windows.ThemeReader;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+
 import java.awt.*;
 
 public class TransferTableRenderer implements TableCellRenderer {
