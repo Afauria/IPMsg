@@ -30,14 +30,13 @@ public class Main {
                 udpServerThread.start();
 
                 //开启Tcp服务器线程，用于接收文件
-                TCPServer tcpServer = new TCPServer().getInstance();
+                TCPServer tcpServer = TCPServer.getInstance();
                 Thread tcpServerThread = new Thread(tcpServer);
                 tcpServerThread.start();
 
                 //UI初始化，注册udp监听器，用于处理udp消息及时更新UI
                 MainWnd mainWnd = MainWnd.getInstance();
                 mainWnd.init();
-                TransferDialog transferDialog = TransferDialog.getInstance();
                 notifyOnline(NetOptions.Login, null);
             }
         });

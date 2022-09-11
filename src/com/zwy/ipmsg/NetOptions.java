@@ -15,5 +15,4 @@ public interface NetOptions {
     int NO = 9;
     int OVER = 10;
     int OVER_ONE_FILE = 11;
-
 }

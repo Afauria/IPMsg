@@ -9,7 +9,7 @@ import java.util.Vector;
 /**
  * Created by 赤脚和尚 on 2018/3/28.
  */
-public class RecordListModel extends AbstractListModel {
+public class RecordListModel extends AbstractListModel<RecordItemEntity> {
     Vector<RecordItemEntity> list;
 
     public RecordListModel(Vector<RecordItemEntity> list) {
@@ -22,7 +22,7 @@ public class RecordListModel extends AbstractListModel {
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public RecordItemEntity getElementAt(int index) {
         return list.get(index);
     }
 }

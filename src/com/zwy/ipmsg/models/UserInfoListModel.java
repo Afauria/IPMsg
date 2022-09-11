@@ -7,7 +7,7 @@ import javax.swing.event.ListDataListener;
 
 import java.util.Vector;
 
-public class UserInfoListModel implements ListModel {
+public class UserInfoListModel implements ListModel<UserBean> {
     private Vector<UserBean> list;
 
     public UserInfoListModel(Vector<UserBean> list) {
@@ -28,7 +28,7 @@ public class UserInfoListModel implements ListModel {
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public UserBean getElementAt(int index) {
         return list.get(index);
     }
 

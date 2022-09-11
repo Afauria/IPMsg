@@ -5,6 +5,7 @@ import com.zwy.ipmsg.models.TransferTableModel;
 import com.zwy.ipmsg.rendeders.TransferTableRenderer;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 import java.awt.*;
 import java.util.Vector;
@@ -27,48 +28,9 @@ public class TransferDialog {
     private final TransferTableModel sendTransferTableModel = new TransferTableModel(sendTransfer, Constant.transferColumn);
     private final TransferTableModel recTransferTableModel = new TransferTableModel(recTransfer, Constant.transferColumn);
 
-    public TransferDialog() {
-        initTransferDialog();
-    }
-
-    private void initSendTransferTable() {
-        sendTransferTable = new JTable();
-        sendTransferTable.setRowHeight(40);
-        sendTransferTable.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
-        sendTransferTable.setFont(new Font(null, Font.PLAIN, 14));
-        sendTransferTable.setSelectionBackground(Color.LIGHT_GRAY);
-        sendTransferTable.setGridColor(Color.GRAY);
-        sendTransferTable.setModel(sendTransferTableModel);
-
-        sendTransferTable.setDefaultRenderer(sendTransferTable.getColumnClass(0), new TransferTableRenderer());
-        sendTransferTable.getColumn(Constant.transferColumn[0]).setPreferredWidth(300);
-        sendTransferTable.getColumn(Constant.transferColumn[1]).setPreferredWidth(200);
-        sendTransferTable.getColumn(Constant.transferColumn[2]).setPreferredWidth(200);
-        sendTransferTable.getColumn(Constant.transferColumn[3]).setPreferredWidth(400);
-        sendTransferTable.getColumn(Constant.transferColumn[4]).setPreferredWidth(250);
-
-    }
-
-    private void initRecTransferTable() {
-        recTransferTable = new JTable();
-        recTransferTable.setRowHeight(40);
-        recTransferTable.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
-        recTransferTable.setFont(new Font(null, Font.PLAIN, 14));
-        recTransferTable.setSelectionBackground(Color.LIGHT_GRAY);
-        recTransferTable.setGridColor(Color.GRAY);
-        recTransferTable.setModel(recTransferTableModel);
-
-        recTransferTable.setDefaultRenderer(recTransferTable.getColumnClass(0), new TransferTableRenderer());
-        recTransferTable.getColumn(Constant.transferColumn[0]).setPreferredWidth(300);
-        recTransferTable.getColumn(Constant.transferColumn[1]).setPreferredWidth(200);
-        recTransferTable.getColumn(Constant.transferColumn[2]).setPreferredWidth(200);
-        recTransferTable.getColumn(Constant.transferColumn[3]).setPreferredWidth(400);
-        recTransferTable.getColumn(Constant.transferColumn[4]).setPreferredWidth(250);
-    }
-
-    private void initTransferDialog() {
-        initSendTransferTable();
-        initRecTransferTable();
+    private TransferDialog() {
+    	sendTransferTable = initSendTransferTable(sendTransferTableModel);
+        recTransferTable = initSendTransferTable(recTransferTableModel);
         transferDialog = new JFrame("文件传输");
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
@@ -99,6 +61,24 @@ public class TransferDialog {
         Dimension screenDimen = tk.getScreenSize();
         Dimension dialogDimen = transferDialog.getContentPane().getSize();
         transferDialog.setLocation((screenDimen.width - dialogDimen.width) / 2, (screenDimen.height - dialogDimen.height) / 2);
+    }
+
+    private JTable initSendTransferTable(TableModel model) {
+        JTable table = new JTable();
+        table.setRowHeight(40);
+        table.getTableHeader().setFont(new Font(null, Font.BOLD, 14));
+        table.setFont(new Font(null, Font.PLAIN, 14));
+        table.setSelectionBackground(Color.LIGHT_GRAY);
+        table.setGridColor(Color.GRAY);
+        table.setModel(model);
+
+        table.setDefaultRenderer(table.getColumnClass(0), new TransferTableRenderer());
+        table.getColumn(Constant.transferColumn[0]).setPreferredWidth(300);
+        table.getColumn(Constant.transferColumn[1]).setPreferredWidth(200);
+        table.getColumn(Constant.transferColumn[2]).setPreferredWidth(200);
+        table.getColumn(Constant.transferColumn[3]).setPreferredWidth(400);
+        table.getColumn(Constant.transferColumn[4]).setPreferredWidth(250);
+        return table;
     }
 
     public void refuseRec(TransferBean transferBean) {

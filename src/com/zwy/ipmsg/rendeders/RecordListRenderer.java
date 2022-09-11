@@ -1,8 +1,7 @@
 package com.zwy.ipmsg.rendeders;
 
+import com.zwy.ipmsg.Main;
 import com.zwy.ipmsg.beans.RecordItemEntity;
-
-import sun.security.tools.keytool.Main;
 
 import javax.swing.*;
 
@@ -12,9 +11,9 @@ import java.awt.geom.RoundRectangle2D;
 /**
  * Created by 赤脚和尚 on 2018/3/28.
  */
-public class RecordListRenderer implements ListCellRenderer {
+public class RecordListRenderer implements ListCellRenderer<RecordItemEntity> {
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, RecordItemEntity value, int index, boolean isSelected, boolean cellHasFocus) {
         RecordItemEntity recordItemEntity = (RecordItemEntity) value;
         JPanel panel = new JPanel();
         JPanel leftPanel = new JPanel();

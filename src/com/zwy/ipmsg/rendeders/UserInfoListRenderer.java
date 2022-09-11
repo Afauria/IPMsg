@@ -8,10 +8,10 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class UserInfoListRenderer implements ListCellRenderer {
+public class UserInfoListRenderer implements ListCellRenderer<UserBean> {
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, UserBean value, int index, boolean isSelected, boolean cellHasFocus) {
         UserBean userBean = (UserBean) value;
         JPanel panel = new JPanel();
         JLabel img = new JLabel();

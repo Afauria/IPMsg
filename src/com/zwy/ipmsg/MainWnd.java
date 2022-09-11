@@ -73,11 +73,11 @@ public class MainWnd {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.updateComponentTreeUI(mainFrame);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        mainFrame.addWindowListener(new WindowListener() {
+        mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 Main.notifyOffline();
@@ -86,38 +86,7 @@ public class MainWnd {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                // TODO Auto-generated method stub
                 initStartPos();
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                // TODO Auto-generated method stub
-
             }
         });
 
@@ -298,7 +267,7 @@ public class MainWnd {
     }
 
     private void initUserListPanel() {
-        userList = new JList();
+        userList = new JList<UserBean>();
         userList.setCellRenderer(new UserInfoListRenderer());
         userList.setModel(userInfoListModel);
         userList.setFont(new Font(null, Font.PLAIN, 14));
@@ -319,7 +288,7 @@ public class MainWnd {
 
 
     private void initMsgPanel() {
-        recordList = new JList();
+        recordList = new JList<RecordItemEntity>();
         recordList.setCellRenderer(new RecordListRenderer());
         recordList.setModel(recordListModel);
         JScrollPane recordPanel = new JScrollPane(recordList);

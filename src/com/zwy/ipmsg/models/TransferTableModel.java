@@ -5,6 +5,8 @@ import com.zwy.ipmsg.beans.TransferBean;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import org.w3c.dom.views.AbstractView;
+
 import java.util.Vector;
 
 public class TransferTableModel implements TableModel {
